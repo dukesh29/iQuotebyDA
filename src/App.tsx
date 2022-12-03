@@ -1,38 +1,24 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import './App.css';
-import Navbar from "./components/Navbar/Navbar";
+import React, {useState} from 'react';
 import {Route, Routes} from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import AddQuote from "./containers/AddQuote/AddQuote";
-import {Quote, QuoteList} from "./type";
-import axiosApi from "./axiosApi";
-import QuoteBody from "./components/QuoteBody/QuoteBody";
 import Home from "./containers/Home/Home";
+import EditQuote from "./containers/EditQuote/EditQuote";
+import CategoryBody from "./containers/CategoryBody/CategoryBody";
+import './App.css';
 
 function App() {
 
-  const [allQuotes, setAllQuotes] = useState<Quote[]>([]);
+  const categories = [
+    {category: 'Звездные войны', id: 'звездные-войны'},
+    {category: 'Мстители', id: 'мстители'},
+    {category: 'DC', id: 'dc'},
+    {category: 'Форсаж', id: 'форсаж'},
+    {category: 'Шурик', id: 'шурик'},
+  ];
 
-  const fetchAllQuotes = useCallback(async () => {
-    try {
-      const quotesResponse = await axiosApi.get<QuoteList>('/quotes.json');
-
-      const quotes = Object.keys(quotesResponse.data).map(key => {
-        const oneQuote = quotesResponse.data[key];
-        oneQuote.id = key;
-        return oneQuote;
-      });
-      setAllQuotes(quotes);
-
-    } catch (e) {
-      console.error(e);
-    }
-  }, []);
-
-  useEffect(() => {
-    void fetchAllQuotes().catch(console.error);
-  }, [fetchAllQuotes]);
-
+  const [nameOfCategory, setNameOfCategory] = useState('');
 
   return (
     <div className="App d-flex flex-column gap-3">
@@ -42,14 +28,21 @@ function App() {
       <main className="container-fluid row">
         <Routes>
           <Route path='/' element={(
-            <Home allQuotes={allQuotes}/>
+            <Home setNameOfCat={setNameOfCategory} categories={categories}/>
           )}/>
           <Route path='/add-quote' element={(
             <AddQuote/>
           )}/>
+          <Route path='/quotes/:id/edit' element={(
+            <EditQuote/>
+          )}/>
+          <Route path='/quotes/:category' element={(
+            <CategoryBody categories={categories} setNameOfCat={setNameOfCategory}
+                          nameOfCategory={nameOfCategory}/>
+          )}/>
         </Routes>
       </main>
-      <footer className="bg-dark py-3">
+      <footer className="bg-warning py-3">
         <Footer/>
       </footer>
     </div>

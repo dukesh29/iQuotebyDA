@@ -1,10 +1,11 @@
 import React from 'react';
-import QuoteForm from "../../components/QuoteForm/QuoteForm";
 import {useNavigate} from "react-router-dom";
-import axiosApi from "../../axiosApi";
 import {QuoteApi} from "../../type";
+import axiosApi from "../../axiosApi";
+import QuoteForm from "../../components/QuoteForm/QuoteForm";
 
-const AddQuote = () => {
+
+const AddQuote= () => {
 
   const navigate = useNavigate();
 
