@@ -11,3 +11,7 @@ main{
 footer{
     flex-shrink: 0;
 }
+
+.btn-div{
+    min-width: 110px;
+}

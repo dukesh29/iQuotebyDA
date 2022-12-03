@@ -34,13 +34,12 @@ function App() {
   }, [fetchAllQuotes]);
 
 
-
   return (
     <div className="App d-flex flex-column gap-3">
       <header>
         <Navbar/>
       </header>
-      <main className="container-fluid d-flex gap-2 flex-column">
+      <main className="container-fluid row">
         <Routes>
           <Route path='/' element={(
             <Home allQuotes={allQuotes}/>

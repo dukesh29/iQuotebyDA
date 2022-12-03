@@ -1,6 +1,7 @@
 import React from 'react';
 import QuoteBody from "../../components/QuoteBody/QuoteBody";
 import {Quote} from "../../type";
+import Sidebar from "../../components/Sidebar/Sidebar";
 
 interface Props {
   allQuotes: Quote[];
@@ -14,7 +15,10 @@ const Home: React.FC<Props> = ({allQuotes}) => {
   });
   return (
     <>
-      {QuotesEl}
+      <Sidebar/>
+      <div className="d-flex gap-2 flex-column col-8">
+        {QuotesEl}
+      </div>
     </>
   );
 };

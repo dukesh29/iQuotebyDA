@@ -40,7 +40,6 @@ const PostForm: React.FC<Props> = ({existingQuote, onSubmit}) => {
       <div className="form-group my-2">
         <label htmlFor="category" className="pb-1 fs-6 fw-bold">Category</label>
         <select name="category" id="category" className="form-select w-25" onChange={onQuoteChange}>
-          <option value="" selected disabled></option>
           <option value="мстители">Мстители</option>
           <option value="звездные-войны">Звездные Войны</option>
           <option value="dc">DC</option>
